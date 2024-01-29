@@ -54,6 +54,16 @@ for running the dashboard
 pip install -r requirement.txt
 streamlit run streamlit_app.py
 ```
+## Further Improvement
+- Streamer
+    + Add contract table
+    + Add token table
+    + Add log table
+- Api
+    + Migrate to grapql
+- Workbench
+    + More robust front
+    + Adding AI for developing queries
 ## DEMO
 
 currently you can find workbench and dashboard demo here

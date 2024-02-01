@@ -60,7 +60,7 @@ streamlit run streamlit_app.py
     + Add token table
     + Add log table
 - Api
-    + Migrate to grapql
+    + Migrate to GraphQL
 - Workbench
     + More robust front
     + Adding AI for developing queries

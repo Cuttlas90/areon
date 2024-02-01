@@ -27,7 +27,7 @@ it lets you convert blockchain data into convenient formats like CSVs and relati
 currently you can Easily export Blocks and Transaction but it can expand for logging other data from the areon blockchain
 
 ```sh
-python.exe .\ethereumetl.py stream -o postgresql+pg8000://postgres:123%40Abcd@127.0.0.1:5432/areondb -e block,transaction --log-file log.txt --provider-uri https://testnet-rpc.areon.network
+python.exe .\ethereumetl.py stream -o postgresql+pg8000://[user]:[password]@127.0.0.1:5432/areondb -e block,transaction --log-file log.txt --provider-uri https://testnet-rpc.areon.network
 ```
 
 ### API

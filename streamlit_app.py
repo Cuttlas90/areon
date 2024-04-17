@@ -97,10 +97,7 @@ with c1:
 with c2:
     st.markdown('### tokens deploy History')
     try:
-        QUERY_STRING = """blocks
-                    transactions
-                    Areon Workbench
-                    Areon Dashboard
+        QUERY_STRING = """
                     SELECT
                     DATE (blocks.timestamp) AS transaction_date,
                     COUNT(hash) AS daily_deploy_tokens
@@ -111,7 +108,6 @@ with c2:
                     transaction_date
                     ORDER BY
                     transaction_date;
-                    Format Query Run Query
                     """
         token_history = areon_query(QUERY_STRING)
         token_history = pd.DataFrame(token_history, columns=\
@@ -135,11 +131,7 @@ with c1:
 
     st.markdown('### Transaction History')
     try:
-        QUERY_STRING = """blocks
-                    transactions
-                    Areon Workbench
-                    Areon Dashboard
-                    SELECT
+        QUERY_STRING = """SELECT
                     DATE (block_timestamp) AS transaction_date,
                     COUNT(hash) AS daily_transaction_count
                     FROM
@@ -147,8 +139,7 @@ with c1:
                     GROUP BY
                     transaction_date
                     ORDER BY
-                    transaction_date
-                    Format Query Run Query
+                    transaction_date;
                     """
         transaction_history = areon_query(QUERY_STRING)
         transaction_history = pd.DataFrame(
@@ -170,11 +161,7 @@ with c1:
 with c2:
     st.markdown('### Daily Active Address History')
     try:
-        QUERY_STRING = """blocks
-                    transactions
-                    Areon Workbench
-                    Areon Dashboard
-                    SELECT
+        QUERY_STRING = """SELECT
                     DATE (block_timestamp) AS transaction_date,
                     COUNT(DISTINCT from_address) AS daily_active_address
                     FROM
@@ -182,8 +169,7 @@ with c2:
                     GROUP BY
                     transaction_date
                     ORDER BY
-                    transaction_date
-                    Format Query Run Query
+                    transaction_date;
                     """
         daily_active_address_history = areon_query(QUERY_STRING)
         daily_active_address_history = pd.DataFrame(
@@ -294,11 +280,7 @@ c1, c2 = st.columns(2)
 with c1:
     st.markdown('### Daily Paid Gas History')
     try:
-        QUERY_STRING = """blocks
-                    transactions
-                    Areon Workbench
-                    Areon Dashboard
-                    SELECT
+        QUERY_STRING = """SELECT
                     DATE (block_timestamp) AS transaction_date,
                     SUM(gas) AS daily_gas_paid
                     FROM
@@ -307,7 +289,6 @@ with c1:
                     transaction_date
                     ORDER BY
                     transaction_date;
-                    Format Query Run Query
                     """
         daily_gas_paid_history = areon_query(QUERY_STRING)
         daily_gas_paid_history = pd.DataFrame(

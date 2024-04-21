@@ -5,6 +5,7 @@ import logging
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import altair as alt
 from request import areon_query
 from slider import create_slider
 
@@ -86,11 +87,14 @@ with c1:
             contract_history['transaction_date'], format="%Y-%m-%d").dt.date
         contract_history_slider = create_slider(
             contract_history, "contract_history", "contract history range:")
-
         filtered_df = contract_history[contract_history['date_column'].between(
             contract_history_slider[0], contract_history_slider[1])]
-        st.line_chart(
-            filtered_df, x = 'date_column', y = "daily_deploy_contracts", height = plot_height)
+        chart_product = alt.Chart(filtered_df,
+                                  height = plot_height).mark_line().encode(
+                            alt.X('date_column:T', title='Date'),
+                            alt.Y('daily_deploy_contracts:Q', title="Number of contracts"),
+                        ).interactive()
+        st.altair_chart(chart_product, use_container_width=True)
     except Exception as e:
         st.write("not available now")
         logging.error("An unknown error occurred: %s", str(e), exc_info=True)
@@ -120,8 +124,12 @@ with c2:
 
         filtered_df = token_history[token_history['date_column'].between(
             token_history_slider[0], token_history_slider[1])]
-        st.line_chart(
-            filtered_df, x = 'date_column', y = "daily_deploy_tokens", height = plot_height)
+        chart_product = alt.Chart(filtered_df,
+                                  height = plot_height).mark_line().encode(
+                            alt.X('date_column:T', title='Date'),
+                            alt.Y('daily_deploy_tokens:Q', title="Number of tokens"),
+                        ).interactive()
+        st.altair_chart(chart_product, use_container_width=True)
     except Exception as e:
         st.write("not available now")
         logging.error("An unknown error occurred: %s", str(e), exc_info=True)
@@ -153,8 +161,13 @@ with c1:
 
         filtered_df = transaction_history[transaction_history['date_column'].between(
             transaction_history_slider[0], transaction_history_slider[1])]
-        st.line_chart(
-            filtered_df, x = 'date_column', y = "daily_transaction_count", height = plot_height)
+        chart_product = alt.Chart(filtered_df,
+                                  height = plot_height
+                                  ).mark_line().encode(
+                            alt.X('date_column:T', title='Date'),
+                            alt.Y('daily_transaction_count:Q', title="Number of transactions"),
+                        ).interactive()
+        st.altair_chart(chart_product, use_container_width=True)
     except Exception as e:
         st.write("not available now")
         logging.error("An unknown error occurred: %s", str(e), exc_info=True)
@@ -187,8 +200,13 @@ with c2:
         filtered_df = \
             daily_active_address_history[daily_active_address_history['date_column'].between(
             daily_active_address_slider[0], daily_active_address_slider[1])]
-        st.line_chart(
-            filtered_df, x = 'date_column', y = "daily_active_address", height = plot_height)
+        chart_product = alt.Chart(filtered_df,
+                                  height = plot_height
+                                  ).mark_line().encode(
+                            alt.X('date_column:T', title='Date'),
+                            alt.Y('daily_active_address:Q', title="Number of active address"),
+                        ).interactive()
+        st.altair_chart(chart_product, use_container_width=True)
     except Exception as e:
         st.write("not available now")
         logging.error("An unknown error occurred: %s", str(e), exc_info=True)
@@ -225,8 +243,13 @@ with c1:
         filtered_df = \
             daily_transaction_value_history[daily_transaction_value_history['date_column'].between(
             daily_transaction_value_slider[0], daily_transaction_value_slider[1])]
-        st.line_chart(
-            filtered_df, x = 'date_column', y = "daily_eth_number_circulate", height = plot_height)
+        chart_product = alt.Chart(filtered_df,
+                                  height = plot_height
+                                  ).mark_line().encode(
+                            alt.X('date_column:T', title='Date'),
+                            alt.Y('daily_eth_number_circulate:Q', title="Daily AREA circulation"),
+                        ).interactive()
+        st.altair_chart(chart_product, use_container_width=True)
     except Exception as e:
         st.write("not available now")
         logging.error("An unknown error occurred: %s", str(e), exc_info=True)
@@ -269,8 +292,13 @@ with c2:
 
         filtered_df = daily_new_address_history[daily_new_address_history['date_column'].between(
             daily_new_address_slider[0], daily_new_address_slider[1])]
-        st.line_chart(
-            filtered_df, x = 'date_column', y = "new_from_addresses", height = plot_height)
+        chart_product = alt.Chart(filtered_df,
+                                  height = plot_height
+                                  ).mark_line().encode(
+                            alt.X('date_column:T', title='Date'),
+                            alt.Y('new_from_addresses:Q', title="Number of new addresses"),
+                        ).interactive()
+        st.altair_chart(chart_product, use_container_width=True)
     except Exception as e:
         st.write("not available now")
         logging.error("An unknown error occurred: %s", str(e), exc_info=True)
@@ -303,7 +331,13 @@ with c1:
 
         filtered_df = daily_gas_paid_history[daily_gas_paid_history['date_column'].between(
             daily_new_address_slider[0], daily_new_address_slider[1])]
-        st.line_chart(filtered_df, x = 'date_column', y = "daily_gas_paid", height = plot_height)
+        chart_product = alt.Chart(filtered_df,
+                                  height = plot_height
+                                  ).mark_line().encode(
+                            alt.X('date_column:T', title='Date'),
+                            alt.Y('daily_gas_paid:Q', title="Daily gas paid"),
+                        ).interactive()
+        st.altair_chart(chart_product, use_container_width=True)
     except Exception as e:
         st.write("not available now")
         logging.error("An unknown error occurred: %s", str(e), exc_info=True)
